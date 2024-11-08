@@ -1,0 +1,185 @@
+swagger: "2.0"
+info:
+  description: "API documentation for my Flask app"
+  version: "1.0.0"
+  title: "My API"
+host: "127.0.0.1:5000"
+schemes:
+  - "http"
+paths:
+  /:
+    get:
+      summary: "Root Endpoint"
+      description: "Returns a welcome message."
+      responses:
+        200:
+          description: "Successful response"
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+
+  /register:
+    post:
+      summary: "Register User"
+      description: "Registers a new user."
+      parameters:
+        - in: body
+          name: user
+          description: "User credentials"
+          required: true
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+              password:
+                type: string
+      responses:
+        201:
+          description: "User registered successfully"
+        400:
+          description: "User registration failed"
+
+  /login:
+    post:
+      summary: "User Login"
+      description: "Authenticates a user."
+      parameters:
+        - in: body
+          name: credentials
+          required: true
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+              password:
+                type: string
+      responses:
+        200:
+          description: "Login successful"
+        401:
+          description: "Invalid credentials"
+
+  /rooms:
+    post:
+      summary: "Create Room"
+      description: "Creates a new chat room."
+      parameters:
+        - in: body
+          name: room
+          required: true
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              admin_id:
+                type: integer
+              timeout_minutes:
+                type: integer
+              is_private:
+                type: boolean
+              access_code:
+                type: string
+                description: "Access code for private rooms"
+      responses:
+        201:
+          description: "Room created"
+        400:
+          description: "Failed to create room"
+
+    get:
+      summary: "List Public Rooms"
+      description: "Returns a list of public rooms."
+      responses:
+        200:
+          description: "List of rooms"
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: integer
+                name:
+                  type: string
+                admin_id:
+                  type: integer
+
+  /rooms/join:
+    post:
+      summary: "Join Room"
+      description: "Allows a user to join a specific room."
+      parameters:
+        - in: body
+          name: room_details
+          required: true
+          schema:
+            type: object
+            properties:
+              user_id:
+                type: integer
+              room_id:
+                type: integer
+              access_code:
+                type: string
+      responses:
+        200:
+          description: "Joined room successfully"
+        400:
+          description: "Failed to join room"
+
+  /rooms/{room_id}/messages:
+    post:
+      summary: "Post Message"
+      description: "Sends a message to the room."
+      parameters:
+        - in: path
+          name: room_id
+          required: true
+          type: integer
+          description: "ID of the room"
+        - in: body
+          name: message
+          required: true
+          schema:
+            type: object
+            properties:
+              user_id:
+                type: integer
+              content:
+                type: string
+      responses:
+        201:
+          description: "Message sent"
+        400:
+          description: "Failed to send message"
+        404:
+          description: "User not found"
+
+    get:
+      summary: "Get Room Messages"
+      description: "Retrieves messages from a room."
+      parameters:
+        - in: path
+          name: room_id
+          required: true
+          type: integer
+          description: "ID of the room"
+      responses:
+        200:
+          description: "List of messages"
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                username:
+                  type: string
+                content:
+                  type: string
+                timestamp:
+                  type: string
