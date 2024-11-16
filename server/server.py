@@ -39,7 +39,7 @@ def handle_room_client(client: socket.socket, room_port: int) -> None:
 
     except Exception as e:
         print(f"Error handling client in room on port {room_port}: {e}")
-        remove_client(client)
+        remove_client(client, room_port)
 
 
 def listen_for_room_messages(
@@ -55,10 +55,10 @@ def listen_for_room_messages(
                 final_msg = f"{username}~{message}"
                 send_messages_to_room(final_msg, room_port)
             else:
-                remove_client(client)
+                remove_client(client, room_port)
                 break
-        except:
-            remove_client(client)
+        except Exception:
+            remove_client(client, room_port)
             break
 
 
@@ -69,7 +69,7 @@ def send_messages_to_room(message: str, room_port: int) -> None:
             try:
                 if user[1].getsockname()[1] == room_port:
                     send_message_to_client(user[1], message)
-            except:
+            except Exception:
                 remove_client(user[1], room_port)
 
 

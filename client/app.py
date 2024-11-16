@@ -23,7 +23,12 @@ def listen_for_messages_from_server(page: ft.Page, message_box: ft.Column) -> No
             message = socket_connection.recv(1024).decode()
             print(f"Received message: {message}")
             if message:
-                sender, content = message.split("~", 1)
+                sender = message.split("~")[0]
+                if sender == "SERVER":
+                    content = message.split("~")[1]
+                    print(f"Content: {content}")
+                else:
+                    content = message.split("~")[2]
                 print(f"Sender: {sender}, Content: {content}")
                 if content:
                     message_box.controls.append(ft.Text(f"{sender}: {content}"))
@@ -267,7 +272,7 @@ def show_public_rooms_ui(page: ft.Page) -> None:
     nickname_field = ft.TextField(hint_text="Enter Nickname")
 
     async def on_join_room(
-        _, room_id: int, nickname: str, access_code: str | None
+        _, room_id: int | None, nickname: str, access_code: str | None
     ) -> None:
         if nickname and join_room(room_id, access_code):
             show_chat_ui(page, room_id, nickname)
@@ -408,8 +413,6 @@ def show_chat_ui(page: ft.Page, room_id: int, nickname: str) -> None:
         if msg:
             post_message(room_id, current_user_id, msg)
             socket_connection.send(f"{nickname}~{msg}".encode())
-            message_box.controls.append(ft.Text(f"{nickname}: {msg}"))
-            page.update()
             message_field.value = ""
             page.update()
 

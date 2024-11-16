@@ -153,7 +153,7 @@ def post_message(
 
 
 @app.route("/rooms/<int:room_id>/messages", methods=["GET"])
-def get_messages(room_id) -> tuple[Response, Literal[200]]:
+def get_messages(room_id: int) -> tuple[Response, Literal[200]]:
     messages = get_room_messages(room_id)
     message_list = [
         {

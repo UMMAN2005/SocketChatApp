@@ -65,10 +65,9 @@ def join_room(
             print("Room has timed out.")
             return None
 
-        if room.is_private:
-            if not room.check_access_code(access_code or ""):
-                print("Incorrect access code for private room.")
-                return None
+        if room.is_private and not room.check_access_code(access_code or ""):
+            print("Incorrect access code for private room.")
+            return None
 
         room_access = (
             session.query(RoomAccess)
