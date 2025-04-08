@@ -11,8 +11,13 @@ from sqlalchemy.orm import declarative_base, relationship, sessionmaker
 from sqlalchemy.ext.declarative import DeclarativeMeta
 from datetime import datetime, timedelta
 import bcrypt
+import os
 
-DATABASE_URI = "postgresql://postgres:DELLg155515@localhost/chat_app"
+PASSWORD = os.getenv("PASSWORD")
+if PASSWORD is None:
+    raise ValueError("PASSWORD is not set in environment variables.")
+
+DATABASE_URI = f"postgresql://postgres:{PASSWORD}@localhost/chat_app"
 
 engine = create_engine(DATABASE_URI)
 SessionLocal = sessionmaker(bind=engine)

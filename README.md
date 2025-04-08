@@ -42,14 +42,21 @@
    uv sync
    ```
 
-4. **Run backend**: Execute the main script of backend:
+4. **Set Env Variables**: Create .env file in this directory and add below variables:
+
+   ```plaintext
+    ENCRYPTION_KEY="iFVRQBqnckzr6oFGgYU2iI67vOoxQ8ubicfuMY5Y3yI="
+    PASSWORD="<Your Actual Database Password>"
+   ```
+
+5. **Run Backend**: Execute the main script of backend:
 
    ```bash
    cd server
    uv run app.py
    ```
 
-5. **Run frontend**: In another terminal execute the main script of frontend:
+6. **Run Frontend**: In another terminal execute the main script of frontend:
 
    ```bash
    cd client
