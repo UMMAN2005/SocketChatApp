@@ -9,4 +9,6 @@ dependencies = [
     "cryptography>=43.0.3",
     "flasgger>=0.9.7.1",
     "flet>=0.24.1",
+    "sqlalchemy>=1.4.0",
+    "psycopg2>=2.9.0",
 ]
