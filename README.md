@@ -7,3 +7,51 @@
 ![Screenshot 2024-11-24 205902](https://github.com/user-attachments/assets/f1b7335e-8f25-4e94-9142-6ddbedeb4e98)
 ![Screenshot 2024-11-24 205941](https://github.com/user-attachments/assets/1d191a64-1c32-44b1-a142-4125d150561d)
 ![Screenshot 2024-11-24 210156](https://github.com/user-attachments/assets/cb2b861e-3d9e-49fd-a0db-7bdd5353d2ab)
+
+## Setup
+
+1. **Install uv**: Download and install `uv` using the appropriate command for your operating system:
+
+   - **macOS and Linux**:
+
+     ```bash
+     curl -LsSf https://astral.sh/uv/install.sh | sh
+     ```
+
+   - **Windows**:
+
+     ```powershell
+     irm https://astral.sh/uv/install.ps1 | iex
+     ```
+
+   Alternatively, if `pip` is available:
+
+   ```bash
+   pip install uv
+   ```
+
+2. **Navigate to the Project Directory**: Change into the directory of the cloned repository:
+
+   ```bash
+   cd SocketChatApp
+   ```
+
+3. **Install Dependencies**: Install the project's dependencies as specified in `pyproject.toml`:
+
+   ```bash
+   uv sync
+   ```
+
+4. **Run backend**: Execute the main script of backend:
+
+   ```bash
+   cd server
+   uv run app.py
+   ```
+
+5. **Run frontend**: In another terminal execute the main script of frontend:
+
+   ```bash
+   cd client
+   uv run app.py
+   ```
