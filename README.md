@@ -10,7 +10,7 @@
 
 ## Setup
 
-1. **Install uv**: Download and install `uv` using the appropriate command for your operating system:
+1. **Install uv**: Download and install `uv` using the appropriate command for your operating system:
 
    - **macOS and Linux**:
 
@@ -45,7 +45,7 @@
 4. **Set Env Variables**: Create .env file in this directory and add below variables:
 
    ```plaintext
-    ENCRYPTION_KEY="iFVRQBqnckzr6oFGgYU2iI67vOoxQ8ubicfuMY5Y3yI="
+    ENCRYPTION_KEY="8FpoN4h3XYcAZBeR3vim+xj0WVbduaUNkZE83SY+i1I="
     PASSWORD="<Your Actual Database Password>"
    ```
 
